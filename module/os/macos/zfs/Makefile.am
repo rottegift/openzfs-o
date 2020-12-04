@@ -161,6 +161,8 @@ zfs_SOURCES = \
 	../../../zfs/vdev.c \
 	../../../zfs/vdev_cache.c \
 	vdev_disk.c \
+	../../../zfs/vdev_draid.c \
+	../../../zfs/vdev_draid_rand.c \
 	vdev_file.c \
 	../../../zfs/vdev_indirect.c \
 	../../../zfs/vdev_indirect_births.c \
