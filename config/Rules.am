@@ -69,6 +69,3 @@ AM_LDFLAGS += -Wl,-x -Wl,--fatal-warnings -Wl,--warn-shared-textrel
 AM_LDFLAGS += -lm
 endif
 
-if BUILD_MACOS
-#AM_LDFLAGS +=
-endif
