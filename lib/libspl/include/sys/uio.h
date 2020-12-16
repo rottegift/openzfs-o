@@ -82,6 +82,7 @@ typedef struct uio {
 #define	uio_iovcnt(uio)			(uio)->uio_iovcnt
 #define	uio_iovlen(uio, idx)		(uio)->uio_iov[(idx)].iov_len
 #define	uio_iovbase(uio, idx)		(uio)->uio_iov[(idx)].iov_base
+#define	uio_setoffset(uio, offset)		(uio)->uio_loffset = (offset)
 
 static inline void
 uio_iov_at_index(uio_t *uio, uint_t idx, void **base, uint64_t *len)
