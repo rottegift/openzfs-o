@@ -46,6 +46,8 @@
  * ZVOL Device
  */
 
+#define ddprintf(fmt, ...) do { } while(0);
+
 // Define the superclass
 #define	super IOBlockStorageDevice
 
@@ -583,9 +585,9 @@ net_lundman_zfs_zvol_device::doAsyncReadWrite(
 		return (kIOReturnBadArgument);
 	}
 
-	// dprintf("%s offset @block %llu numblocks %llu: blksz %u\n",
-	//   direction == kIODirectionIn ? "Read" : "Write",
-	//  block, nblks, (ZVOL_BSIZE));
+	ddprintf("%s offset @block %llu numblocks %llu: blksz %u\n",
+	    direction == kIODirectionIn ? "Read" : "Write",
+	    block, nblks, (ZVOL_BSIZE));
 
 	/* Perform the read or write operation through the transport driver. */
 	actualByteCount = (nblks*(ZVOL_BSIZE));
@@ -628,7 +630,7 @@ net_lundman_zfs_zvol_device::doAsyncReadWrite(
 IOReturn
 net_lundman_zfs_zvol_device::doDiscard(UInt64 block, UInt64 nblks)
 {
-	dprintf("doDiscard called with block, nblks (%llu, %llu)\n",
+	ddprintf("doDiscard called with block, nblks (%llu, %llu)\n",
 	    block, nblks);
 	uint64_t bytes		= 0;
 	uint64_t off		= 0;
@@ -653,7 +655,7 @@ net_lundman_zfs_zvol_device::doUnmap(IOBlockStorageDeviceExtent *extents,
 	UInt32 i = 0;
 	IOReturn result;
 
-	dprintf("doUnmap called with (%u) extents and options (%u)\n",
+	ddprintf("doUnmap called with (%u) extents and options (%u)\n",
 	    (uint32_t)extentsCount, (uint32_t)options);
 
 	if (options > 0 || !extents) {
@@ -753,7 +755,7 @@ net_lundman_zfs_zvol_device::reportPollRequirements(bool *pollRequired,
 IOReturn
 net_lundman_zfs_zvol_device::reportRemovability(bool *isRemovable)
 {
-	dprintf("reportRemova\n");
+	dprintf("reportRemoval\n");
 	if (isRemovable) *isRemovable = false;
 	return (kIOReturnSuccess);
 }
@@ -788,7 +790,7 @@ net_lundman_zfs_zvol_device::doLockUnlockMedia(bool doLock)
 IOReturn
 net_lundman_zfs_zvol_device::doSynchronizeCache(void)
 {
-	dprintf("doSync\n");
+	ddprintf("doSync\n");
 	if (zv && zv->zv_zilog) {
 		zil_commit(zv->zv_zilog, ZVOL_OBJ);
 	}
