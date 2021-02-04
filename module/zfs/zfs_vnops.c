@@ -665,6 +665,7 @@ zfs_write(znode_t *zp, uio_t *uio, int ioflag, cred_t *cr)
 		}
 	}
 
+	extern void	zfs_inode_update(struct znode *);
 	zfs_inode_update(zp);
 	zfs_rangelock_exit(lr);
 

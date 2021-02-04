@@ -1587,7 +1587,7 @@ gcm_init_avx(gcm_ctx_t *ctx, unsigned char *iv, size_t iv_len,
 	return (CRYPTO_SUCCESS);
 }
 
-#if defined(_KERNEL)
+#if defined(_KERNEL) && !defined(__APPLE__)
 static int
 icp_gcm_avx_set_chunk_size(const char *buf, zfs_kernel_param_t *kp)
 {
@@ -1595,6 +1595,7 @@ icp_gcm_avx_set_chunk_size(const char *buf, zfs_kernel_param_t *kp)
 	char val_rounded[16];
 	int error = 0;
 
+#pragma clang disable "-Wimplicit-function-definition"
 	error = kstrtoul(buf, 0, &val);
 	if (error)
 		return (error);
@@ -1605,6 +1606,7 @@ icp_gcm_avx_set_chunk_size(const char *buf, zfs_kernel_param_t *kp)
 		return (-EINVAL);
 
 	snprintf(val_rounded, 16, "%u", (uint32_t)val);
+#pragma clang disable "-Wimplicit-function-definition"
 	error = param_set_uint(val_rounded, kp);
 	return (error);
 }
