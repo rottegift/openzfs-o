@@ -41,6 +41,7 @@
 #include <unistd.h>
 #include <sysexits.h>
 #include <err.h>
+#pragma clang diagnostic ignored "-Wimplicit-function-declaration"
 
 static void
 usage(const char *name)

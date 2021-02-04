@@ -33,6 +33,7 @@
 #include <pthread.h>
 #include <errno.h>
 #include <err.h>
+#pragma clang diagnostic ignored "-Wimplicit-function-declaration"
 
 /*
  * --------------------------------------------------------------------
